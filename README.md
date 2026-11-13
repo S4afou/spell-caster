@@ -1,8 +1,8 @@
 # Spell Caster: dual-task ASR and speech-emotion recognition
 
-A voice-controlled spellcasting prototype. The player speaks a spell name, the pipeline
-transcribes the word and classifies the emotion behind it, and the game reacts to both.
-This repository holds the speech half of the project: the training notebook, the
+I built the speech half of Spell Caster, a voice-controlled spellcasting prototype. The
+player speaks a spell name, the pipeline transcribes the word and classifies the emotion
+behind it, and the game reacts to both. This repository holds the training notebook, the
 inference server, the report and the figures.
 
 | Result | Value | Context |
@@ -21,16 +21,17 @@ Voice control in games is usually a menu shortcut. Here the spell name *and* the
 behind it both matter, which means running transcription and affect classification on the
 same short, noisy, microphone utterance, on a laptop CPU, in under two seconds.
 
-Two models are compared:
+I compared two models:
 
 - **Model A, Conformer from scratch.** Lightweight, 4x downsampling, CTC head for ASR and
   an attention-pooling head for SER. Exported to ONNX INT8 for cheap CPU inference.
 - **Model B, Whisper-Small.** Stock Whisper for transcription, plus LoRA adapters and a
   custom pooling head for emotion.
 
-Multi-task training uses Kendall's uncertainty weighting so the two losses do not need
-hand-tuned scales. The final server uses stock Whisper for ASR and the LoRA-tuned encoder
-for emotion, which is why the shipped WER is 0.0015 rather than the Conformer's 0.113.
+I trained both tasks together with Kendall's uncertainty weighting, so the two losses do not
+need hand-tuned scales. The final server uses stock Whisper for ASR and the LoRA-tuned
+encoder for emotion, which is why the shipped WER is 0.0015 rather than the Conformer's
+0.113.
 
 ## Results
 
@@ -52,9 +53,9 @@ assets/                                         the four figures used below
 data/README.md                                  CREMA-D and LibriSpeech sources
 ```
 
-Commit dates reflect when the work was done. The history was reconstructed from the
-Kaggle exports, the server source and the report, because the project was written in
-notebooks and never tracked in git.
+Commit dates reflect when the work was done. I reconstructed the history from the Kaggle
+exports, the server source and the report, because the project was written in notebooks and
+never tracked in git.
 
 ## The server
 
@@ -83,10 +84,13 @@ trained weights for a demo, open an issue.
 
 ## Team and context
 
-Course project for the Natural Language Processing module (ESI-SBA, 2025/2026, taught by
-R. Bousmaha). The report lists four students: Medjahri Mohammed Safouane, Benayed Mohammed
-Amjed, Ben Terki Abdel-Ouakil and Aini Ines.
+This was a course project for the Natural Language Processing module (ESI-SBA, 2025/2026,
+taught by R. Bousmaha). The report lists four students: Medjahri Mohammed Safouane, Benayed
+Mohammed Amjed, Ben Terki Abdel-Ouakil and Aini Ines.
 
-The ASR and SER pipeline, the training notebook, the ONNX export and the FastAPI server are
-my work. The Unity game and its C# state machines were built by a teammate, and the
-integration was shared. The Unity sources are not published here.
+I built the ASR and SER pipeline, the training notebook, the ONNX export and the FastAPI
+server. A teammate built the Unity game and its C# state machines, and we did the
+integration together. The Unity sources are not published here.
+
+More about this project on my portfolio:
+https://safouane-medjahri.vercel.app/projects/spell-caster
