@@ -85,8 +85,7 @@ trained weights for a demo, open an issue.
 ## Team and context
 
 This was a course project for the Natural Language Processing module (ESI-SBA, 2025/2026,
-taught by R. Bousmaha). The report lists four students: Medjahri Mohammed Safouane, Benayed
-Mohammed Amjed, Ben Terki Abdel-Ouakil and Aini Ines.
+taught by R. Bousmaha).
 
 I built the ASR and SER pipeline, the training notebook, the ONNX export and the FastAPI
 server. A teammate built the Unity game and its C# state machines, and we did the
